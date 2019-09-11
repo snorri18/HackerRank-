@@ -1,0 +1,9 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+s = input()
+
+from itertools import groupby
+
+t =()
+for clave, grupo in groupby(s):
+    t = len(list(grupo)),int(clave)
+    print(t,end=' ')
