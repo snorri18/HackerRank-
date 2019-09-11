@@ -1,0 +1,43 @@
+#!/usr/bin/python
+
+def displayPathtoPrincess(n,grid):
+    #print all the moves here
+    rescue = 0
+    #Vemos donde se encuentra la princesa
+    if grid[0][0] == 'p':
+        rescue = 0
+    elif grid[0][n-1] == 'p':
+        rescue = 1
+    elif grid[n-1][0] == 'p':
+        rescue = 2
+    elif grid[n-1][n-1] == 'p':
+        rescue = 3
+        
+    #elaboramos la ruta mas corta una vez sabemos la ubicación
+    if rescue == 0:
+        for i in range(int(n/2),n-1):
+            print ('UP', end='\n')
+        for i in range(int(n/2),n-1):
+            print ('LEFT', end='\n')
+    if rescue == 1:
+        for i in range(int(n/2),n-1):
+            print ('UP', end='\n')
+        for i in range(int(n/2),n-1):
+            print ('RIGHT', end='\n')
+    if rescue == 2:
+        for i in range(int(n/2),n-1):
+            print ('DOWN', end='\n')
+        for i in range(int(n/2),n-1):
+            print ('LEFT', end='\n')
+    if rescue == 3:
+        for i in range(int(n/2),n-1):
+            print ('DOWN', end='\n')
+        for i in range(int(n/2),n-1):
+            print ('RIGHT', end='\n')
+
+            m = int(input())
+grid = [] 
+for i in range(0, m): 
+    grid.append(input().strip())
+
+displayPathtoPrincess(m,grid)
