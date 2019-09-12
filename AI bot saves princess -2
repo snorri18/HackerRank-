@@ -1,0 +1,26 @@
+#version -2
+def nextMove(n,r,c,grid):
+    #Buscamos la posición de p
+    for i in range(0,n):
+        for j in range (0,n):
+            if (grid[i][j] == 'p'):
+                p1,p2=i,j
+                
+    #Comparamos posiciones        
+    if p1 < r:
+        return('UP')
+    elif p1 > r:
+        return('DOWN')
+    elif (p1 == r) and (p2 < c):
+        return ('LEFT')
+    elif (p1 == r) and (p2 > c):
+        return ('RIGHT')
+
+
+n = int(input())
+r,c = [int(i) for i in input().strip().split()]
+grid = []
+for i in range(0, n):
+    grid.append(input())
+
+print(nextMove(n,r,c,grid))
