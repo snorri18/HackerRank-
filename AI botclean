@@ -1,0 +1,70 @@
+import math
+
+def update_position(posc,posr,dirties):
+    #Usamos la distancia euclidea para ver el mas cercano para el siguiente movimiento
+    nearest_dirt = []
+    for i in range(len(dirties)):
+        # Euclidean distance para calcular
+        result = math.sqrt(((dirties[i][0] - posr) ** 2) + ((dirties[i][1] - posc) ** 2))
+        nearest_dirt.append(result)
+    #Ordena a partir de dirties los mas cercanos
+    return [x for (y,x) in sorted(zip(nearest_dirt,dirties))]    
+
+def paint_board(n,board):
+    #Pintamos el tablero
+    for i in range(n):
+        for j in range(n):
+            print(board[i][j],end='')
+        print('\n')
+
+
+
+def next_move(posr, posc, board):    
+    dirties = []
+    n = 5
+    #primeramente metemos en una lista la posicion de los sucios
+    for i in range(n):
+        for j in range(n):
+            if board[i][j] == 'd':
+                dirties.append([i, j])
+    
+    #ahora sacamos el siguiente sucio
+    next_dirt = update_position(posc, posr, dirties)
+    if next_dirt[0][0] < posr:
+        posr -= 1
+        if board[posr][posc] != 'd':
+            board[posr][posc] = 'b'
+        paint_board(n,board)
+        return('UP')
+    elif next_dirt[0][0] > posr:
+        posr += 1
+        if board[posr][posc] != 'd':
+            board[posr][posc] = 'b'
+        paint_board(n,board)
+        return('DOWN')
+    elif next_dirt[0][1] < posc:
+        posc -= 1
+        if board[posr][posc] != 'd':
+            board[posr][posc] = 'b'
+        paint_board(n,board)
+        return('LEFT')
+    elif next_dirt[0][1]  > posc:
+        posc += 1
+        if board[posr][posc] != 'd':
+            board[posr][posc] = 'b'
+        paint_board(n,board)
+        return('RIGHT')
+    else:
+        board[posr][posc] = 'b'
+        paint_board(n,board)
+        return('CLEAN')
+    
+
+posr,posc = [int(i) for i in input().strip().split()]
+
+board = []
+n = 5
+for i in range(0, n):
+    board.append(input().split())
+    
+print(next_move(posr,posc,board))
