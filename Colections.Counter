@@ -1,0 +1,23 @@
+from collections import Counter
+
+# obtenemos los inputs que necesitamos
+x = int(input())
+sizes = list(map(int, input().split()))
+n = int(input())
+purchase = []
+for i in range(n):
+    item = list(map(int, input().split()))
+    purchase.append(item)
+
+# contador
+counts = Counter(sizes)
+money_earned = 0
+
+# actualizamos el contador cuando cumpla los requisitos
+for item in purchase:
+    if(counts[item[0]] != 0):
+        counts[item[0]] -= 1
+        money_earned += item[1]
+
+# print 
+print(money_earned)
